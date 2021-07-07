@@ -31,6 +31,8 @@ namespace Company.Function
                 
                 public int id {get;set;}
                 public string main {get;set;}
+
+                public string icon {get;set;}
             }
 
             public class Main {
@@ -64,6 +66,9 @@ namespace Company.Function
                 public double mn_Temp {get;set;}
                 public string cur_Weather {get;set;}
 
+                
+                public string Icon {get;set;}
+
             }
         }
         
@@ -81,16 +86,19 @@ namespace Company.Function
                 City = data.name,
 
                 Weather = new Res_Weather._Weather{
-                    id = data.weather[0].id,
+                  
                     Temp = data.main.temp,
                     mx_Temp = data.main.temp_max,
                 mn_Temp = data.main.temp_min,
-                    cur_Weather = data.weather[0].main
+                    cur_Weather = data.weather[0].main,
+                    
+                      Icon = data.weather[0].icon
                 }
             };
        
             string ser_Json = JsonConvert.SerializeObject(res_Weather);
-    
+
+            Console.WriteLine(ser_Json);
             return new OkObjectResult(ser_Json);
         }
     }

@@ -22,7 +22,10 @@ xhttp.onreadystatechange = function (){
         button.innerHTML = "FIND";
         document.getElementById("err-city").hidden = true;
         weather_Temp = par_Json.Weather.Temp;
-        console.log(weather_Temp);
+        
+      
+      
+        currentWeatherIcon(par_Json.Weather.Icon)
         changeStats(par_Json);
        }
       
@@ -33,12 +36,20 @@ xhttp.onreadystatechange = function (){
 function cityNotFound(){
    
     document.getElementById("err-city").hidden = false;
+    document.getElementById("city-button").disabled = false
+    document.getElementById("city-button").innerHTML = "FIND";
 }
 
 function changeStats(weather){
 
-   
+
       document.getElementById("res-City").innerHTML = weather.City;
+      if(weather.Weather.cur_Weather == "Clouds"){
+        document.getElementById("res-Main").innerHTML = "Cloudy"
+      }else{
+        document.getElementById("res-Main").innerHTML = weather.Weather.cur_Weather
+      }
+    
       if(isCelcius == false){
 
         document.getElementById("res-Temp").innerHTML = weather.Weather.Temp +"F";
@@ -67,9 +78,17 @@ function changeMetric(){
 }
 
 
-function currentWeatherIcon(id){
+function currentWeatherIcon(icon){
 
+   
+
+    var _icon = document.getElementById("icon")
+      
+    _icon.style.backgroundImage = `url(/FrontEnd//images/weather_images/${icon}.svg)`
+  
 }
+
+
 
 
 if(document.getElementById("city-button").disabled == false){
@@ -84,7 +103,7 @@ if(document.getElementById("city-button").disabled == false){
             var createJson = {
                 City : city
             }
-            var button =
+        
             button.innerHTML = "Loading..."
            
            xhttp.open("POST",url);

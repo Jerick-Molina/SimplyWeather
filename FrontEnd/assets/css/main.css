@@ -1299,9 +1299,10 @@ input, select, textarea {
 			}
 
 		#header .icon {
-			background-image: url(/FrontEnd//images/weather_images/Cloudy.svg);
+			background-image: url(/FrontEnd//images/weather_images/01d.svg);
 			width: 85px;
 			height: 50px;
+			background-position: center;
 			background-repeat: no-repeat;
 		}
 		#header .content {

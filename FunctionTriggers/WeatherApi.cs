@@ -47,7 +47,7 @@ namespace Company.Function
             {
 
                 {$"q",$"{test.City}"},
-                {"appid",""},
+                {"appid","271e2bf30bad893931a464ed508e5e41"},
                 {"units","imperial"}
             };
 
@@ -82,6 +82,8 @@ namespace Company.Function
             if(api_status.cod == "404"){
                 return new OkObjectResult(api_status);
             }else if (api_status.cod == "400"){
+                 return new OkObjectResult(api_status); 
+            }else if (api_status.cod == "401"){
                  return new OkObjectResult(api_status); 
             }
           
