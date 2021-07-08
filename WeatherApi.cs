@@ -36,7 +36,8 @@ namespace Company.Function
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            var clientURI = "https://simplyweather.azurewebsites.net/api/ApiTrigger?code=syC6KA0KoHYK4Jb8YOyWEo8x5RblshhRX/RMJvpMWzkVovRWma7Ozw==";
+            // Talks to other Function.
+            var clientURI = "https://simplyweather.azurewebsites.net/api/ApiTrigger?";
             var query = "?";
             
 
@@ -45,7 +46,7 @@ namespace Company.Function
             var test = JsonConvert.DeserializeObject<ClientRequest>(requestBody);
             var values = new Dictionary<String,String>
             {
-
+                //List the Key and Value for the query 
                 {$"q",$"{test.City}"},
                 {"appid","271e2bf30bad893931a464ed508e5e41"},
                 {"units","imperial"}
@@ -53,9 +54,7 @@ namespace Company.Function
 
        
 
-            //Creates query.
-            
-            
+            //Creates query
             var dictonaryCount = 0;
             foreach(var value in values){
                 for(int i = dictonaryCount; i < values.Count;){
@@ -77,7 +76,8 @@ namespace Company.Function
 
             var str_Response = await api_return.Content.ReadAsStringAsync();
             var http_Content = new StringContent(str_Response);
-
+            
+            //Checks for any error response to send back to the client.
             Console.WriteLine(str_Response);
             if(api_status.cod == "404"){
                 return new OkObjectResult(api_status);
@@ -87,12 +87,12 @@ namespace Company.Function
                 return new OkObjectResult(api_status); 
             }
           
-            //Sends Api to function and gets Response.
+            //Sends Api to other function and gets Response.
             HttpResponseMessage func_Req = await client.PostAsync(clientURI,http_Content);
 
             var func_Res = await func_Req.Content.ReadAsStringAsync();
           
-
+            //sends Response back to user.
             return new OkObjectResult(func_Res);
         }
     }
