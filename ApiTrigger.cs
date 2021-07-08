@@ -78,10 +78,11 @@ namespace Company.Function
             ILogger log)
         {
             
+            //Gets request from "WeatherAPI" and deserialize JSON
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var data = JsonConvert.DeserializeObject<Req_Weather>(requestBody);
 
-            
+            //Converts so more Simpler JSON to send to the client.
             var res_Weather = new Res_Weather{
                 City = data.name,
 
@@ -97,7 +98,8 @@ namespace Company.Function
             };
        
             string ser_Json = JsonConvert.SerializeObject(res_Weather);
-
+            
+            //Sends back to the previous function to send to the client.
             Console.WriteLine(ser_Json);
             return new OkObjectResult(ser_Json);
         }
