@@ -1,7 +1,7 @@
 var xhttp = new XMLHttpRequest();
 
-//let url =  "https://68cd1f42-2b9a-4080-a386-bd1f5f8f70a9.mock.pstmn.io";
-let url = "http://localhost:7071/api/WeatherApi";
+
+let url = "https://simplyweather.azurewebsites.net/api/WeatherApi?code=SwN0o4bnA7zyTaKoujYuwUR44daQfwUMkJZduQfdY9nZrE/G8/eKcQ==";
 var par_Json;
 var weather_temp;
 var isCelcius = false;
@@ -84,7 +84,7 @@ function currentWeatherIcon(icon){
 
     var _icon = document.getElementById("icon")
       
-    _icon.style.backgroundImage = `url(/FrontEnd//images/weather_images/${icon}.svg)`
+    _icon.style.backgroundImage = `url(FrontEnd/images/weather_images/${icon}.svg)`
   
 }
 

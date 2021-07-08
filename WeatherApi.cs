@@ -36,7 +36,7 @@ namespace Company.Function
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            var clientURI = "http://localhost:7071/api/ApiTrigger";
+            var clientURI = "https://simplyweather.azurewebsites.net/api/ApiTrigger?code=syC6KA0KoHYK4Jb8YOyWEo8x5RblshhRX/RMJvpMWzkVovRWma7Ozw==";
             var query = "?";
             
 
